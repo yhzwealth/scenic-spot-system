@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "knife4j.scanList",
+      "type": "java.lang.String",
+      "description": "Description for knife4j.scanList."
+    },
+    {
+      "name": "wx.appId",
+      "type": "java.lang.String",
+      "description": "Description for wx.appId."
+    }
+  ] }

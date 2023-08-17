@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.matrix.mapper.CodeingardinfoMapper">
+
+    <select id="gardQuery" resultType="com.matrix.Vo.CodeInInfoGardVo">
+        SELECT `codeingardinfo`.recId, `codeinfo`.valiCode,`codeingardinfo`.inDateTime, `userinfo`.userName
+        FROM `codeingardinfo`,`userinfo`,`codeinfo`
+        WHERE `codeingardinfo`.scanUserId = `userinfo`.userId
+        AND `codeingardinfo`.codeId = `codeinfo`.codeId
+        AND gateId = #{gateId}
+        <if test="start != null">
+            AND ( inDateTime BETWEEN #{start} AND #{end})
+        </if>
+        ORDER BY `codeingardinfo`.inDateTime
+    </select>
+
+    <select id="managerQuery" resultType="com.matrix.Vo.CodeInInfoManagerVo">
+        SELECT `gardgate`.*,COUNT(`codeingardinfo`.`gateId`)AS views FROM `gardgate`
+        LEFT JOIN `codeingardinfo`
+        ON `codeingardinfo`.`gateId`=`gardgate`.`gateId`
+        AND ( inDateTime BETWEEN #{start} AND #{end})
+        GROUP BY `gardgate`.`gateId`
+        ORDER BY `gardgate`.`gardenName` ASC
+    </select>
+
+
+</mapper>

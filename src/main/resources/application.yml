@@ -1,0 +1,37 @@
+server:
+  port: 9999
+  servlet:
+    context-path:
+    session:
+      cookie:
+        domain: 122.9.0.77
+        path: /work/
+        max-age: 3600
+#  ssl:
+#    key-store: server.keystore ##秘钥库文件名称，即上面生成的自签名证书
+#    key-store-password: 123456 ## 生成秘钥库文件的密码
+#    key-store-type: JKS ## 秘钥库类型（JKS为jdk的keytool工具默认生成的秘钥库类型）
+#    key-alias: tomcat ## 秘钥别名
+
+knife4j:
+  enable: true
+
+spring:
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+
+
+
+#微信相关配置
+wx:
+  #appId （到时候换成自己公众号的）
+  appId: wx1f6c11d71c889c04
+  #appSecret（到时候换成自己公众号的）
+  appSecret: e33861f837334381c218583d575ea991
+  #参考以下文档获取access_token（有效期7200秒，开发者必须在自己的服务全局缓存access_token）
+  jssdk_accesstoken_url: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
+  #用第一步拿到的access_token 采用http GET方式请求获得jsapi_ticket（有效期7200秒，开发者必须在自己的服务全局缓存jsapi_ticket）
+  jssdk_getticket_url: https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
